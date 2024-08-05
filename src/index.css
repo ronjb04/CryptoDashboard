@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #151f2c;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #374151;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #374151;
+
+}
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color:  #374151 #151f2c;
+}
