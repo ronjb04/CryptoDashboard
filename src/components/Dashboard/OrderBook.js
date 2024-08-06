@@ -96,19 +96,19 @@ export const OrderBookComponent = () => {
   }, [selectedCurrency]);
 
   return (
-    <div className='min-w-full col-span-2'>
-      <h3 className='text-xl font-bold text-center py-2'>Order Book: {selectedCurrency}</h3>
+    <div className='min-w-full col-span-6 sm:col-span-2 px-2 sm:px-0'>
+      <h3 className='text-base sm:text-xl font-bold text-center py-2'>Order Book: {selectedCurrency}</h3>
       <div className="flex w-full justify-between mb-4">
         <dl className='w-1/2'>
-          <dt className='mb-1'>Spread:</dt>
-          <dd className='inline-block leading-tight px-2 py-2 text-base text-gray-200 border border-slate-600 rounded-lg bg-slate-800 dark:bg-slate-700 dark:border-slate-700 dark:text-white'>{spread !== null ? `${spread}%` : 'Calculating...'}</dd>
+          <dt className='mb-1 text-sm sm:text-base'>Spread:</dt>
+          <dd className='inline-block leading-tight px-2 py-2 sm:px-4 sm:py-3 text-xs sm:text-base text-gray-200 border border-slate-600 rounded-lg bg-slate-800 dark:bg-slate-700 dark:border-slate-700 dark:text-white'>{spread !== null ? `${spread}%` : 'Calculating...'}</dd>
         </dl>
         <div className='flex w-1/2 justify-end'>
           <div className='mr-5'>
-            <h3 className='mb-1'>Depth</h3>
+            <h3 className='mb-1 text-sm sm:text-base'>Depth</h3>
             <form>
               <select 
-                className="block w-full px-2 py-2 text-base text-gray-200 border border-gray-600 rounded-lg bg-gray-700 focus:ring-gray-500 focus:border-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-none"
+                className="block w-full px-2 py-2 sm:px-4 sm:py-3 text-xs sm:text-base text-gray-200 border border-gray-600 rounded-lg bg-gray-700 focus:ring-gray-500 focus:border-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-none"
                 value={depth}
                 onChange={handleDepthChange} 
               >
@@ -119,10 +119,10 @@ export const OrderBookComponent = () => {
             </form>
           </div>
           <div>
-            <h3 className='mb-1'>Aggregation</h3>
+            <h3 className='mb-1 text-sm sm:text-base'>Aggregation</h3>
             <form>
               <select 
-                className="block w-full px-2 py-2 text-base text-gray-200 border border-gray-600 rounded-lg bg-gray-700 focus:ring-gray-500 focus:border-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-none"
+                className="block w-full px-2 py-2 sm:px-4 sm:py-3 text-xs sm:text-base text-gray-200 border border-gray-600 rounded-lg bg-gray-700 focus:ring-gray-500 focus:border-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-none"
                 value={aggregationLevel}
                 onChange={handleAggregationChange}
               >
@@ -135,14 +135,14 @@ export const OrderBookComponent = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div className='max-h-[calc(100vh-260px)] overflow-auto custom-scrollbar'>
+      <div className="grid grid-cols-2 gap-2 sm:gap-4">
+        <div className='max-h-[calc(100vh-260px)] overflow-auto custom-scrollbar pb-4 sm:pb-0'>
           <table className="table-auto w-full">
             <thead>
               <tr>
                 <th className='w-0/2'></th>
-                <th className='w-1/2 text-left'>Market Size</th>
-                <th className='w-1/2 text-left'>Price</th>
+                <th className='w-1/2 text-left text-sm sm:text-base'>Market Size</th>
+                <th className='w-1/2 text-left text-sm sm:text-base'>Price</th>
               </tr>
             </thead>
             <tbody>
@@ -151,21 +151,21 @@ export const OrderBookComponent = () => {
                 return (
                   <tr key={index} className="relative">
                     <td className="block bg-green-600 absolute right-0 top-0 h-full opacity-90" style={{ width: `${width}%` }}></td>
-                    <td className="relative z-10 w-1/2">{bid.size.toFixed(8)}</td>
-                    <td className="relative z-10 w-1/2">{bid.price.toFixed(2)}</td>
+                    <td className="relative z-10 w-1/2 text-sm sm:text-base">{bid.size.toFixed(8)}</td>
+                    <td className="relative z-10 w-1/2 text-sm sm:text-base">{bid.price.toFixed(2)}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
         </div>
-        <div className='max-h-[calc(100vh-260px)] overflow-auto custom-scrollbar'>
+        <div className='max-h-[calc(100vh-260px)] overflow-auto custom-scrollbar pb-4 sm:pb-0'>
           <table className="table-auto w-full">
             <thead>
               <tr>
                 <th className='w-0/2'></th>
-                <th className='w-1/2 text-left'>Price</th>
-                <th className='w-1/2 text-left'>Market Size</th>
+                <th className='w-1/2 text-left text-sm sm:text-base'>Price</th>
+                <th className='w-1/2 text-left text-sm sm:text-base'>Market Size</th>
               </tr>
             </thead>
             <tbody>
@@ -174,8 +174,8 @@ export const OrderBookComponent = () => {
                 return (
                   <tr key={index} className="relative">
                     <td className="block bg-red-600 absolute left-0 top-0 h-full opacity-90" style={{ width: `${width}%` }}></td>
-                    <td className="relative z-10 w-1/2">{ask.price.toFixed(2)}</td>
-                    <td className="relative z-10 w-1/2">{ask.size.toFixed(8)}</td>
+                    <td className="relative z-10 w-1/2 text-sm sm:text-base">{ask.price.toFixed(2)}</td>
+                    <td className="relative z-10 w-1/2 text-sm sm:text-base">{ask.size.toFixed(8)}</td>
                   </tr>
                 );
               })}

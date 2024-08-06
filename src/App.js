@@ -5,9 +5,9 @@ import { OrderBookComponent } from './components/Dashboard/OrderBook';
 
 function App(props) {
   return (
-    <div className="bg-slate-800 dark:bg-slate-800 min-h-screen text-gray-300 px-4">
+    <div className="bg-slate-800 dark:bg-slate-800 min-h-screen text-gray-300 px-0 sm:px-4">
       <HeaderComponent />
-      <div className="grid grid-cols-6 gap-4">
+      <div className="grid grid-cols-6 sm:gap-4">
         <ChartComponent />
         <OrderBookComponent/>
       </div>

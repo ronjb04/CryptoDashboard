@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import { useSelector, useDispatch } from 'react-redux';
 import { getHistoricalData } from '../../api/coinbaseApi';
+import { useScreenDetector } from '../../hooks/useScreenDetector';
 
 const chartInitialState = {
   labels: [],
@@ -14,6 +15,7 @@ const chartInitialState = {
 
 export const ChartComponent = () => {
   const dispatch = useDispatch();
+  const { isMobile, isTablet, isDesktop } = useScreenDetector();
   const selectedCurrency = useSelector((state) => state.selectedCurrency);
   const previousCurrencyRef = useRef();
   const tickerData = useSelector((state) => state.ticker.data);
@@ -74,6 +76,9 @@ export const ChartComponent = () => {
               beginAtZero: false,
               ticks: {
                 color: 'rgb(203, 213, 225)',
+                display: !isMobile,
+                autoSkipPadding: 30,
+                padding: 30
               },
             },
             y: {
@@ -99,6 +104,11 @@ export const ChartComponent = () => {
       });
     }
   }, [chartData]);
+
+  useEffect(() => {
+    chartInstanceRef.current.config.options.scales.x.ticks.display = !isMobile;
+    chartInstanceRef.current.update(); 
+  }, [isMobile, isTablet, isDesktop]);
 
   useEffect(() => {
     if (!tickerData || !chartInstanceRef.current) return;
@@ -152,14 +162,14 @@ export const ChartComponent = () => {
   };
 
   return (
-    <div className='min-w-full col-span-4'>
-      <h3 className='text-xl font-bold text-center py-2'>Price Chart: {selectedCurrency}</h3>
+    <div className='min-w-full col-span-6 sm:col-span-4'>
+      <h3 className='text-base sm:text-xl font-bold text-left sm:text-center mt-5 -mb-4 pl-8 sm:mt-0 sm:px-0 sm:py-2'>Price Chart: {selectedCurrency}</h3>
       <div className="flex flex-col justify-start items-end">
-        <div className='-mb-6 relative z-10 mr-2'>
-          <h3 className='mb-1 text-right'>View Mode</h3>
+        <div className='-mt-6 sm:mt-0 -mb-2 sm:-mb-6 relative z-10 mr-2'>
+          <h3 className='mb-1 text-right text-sm sm:text-base'>View Mode</h3>
           <form>
             <select 
-              className="block px-2 py-2 text-base text-gray-200 border border-gray-600 rounded-lg bg-gray-700 focus:ring-gray-500 focus:border-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-none"
+              className="block min-w-24 sm:min-w-32 px-2 py-2 sm:px-4 sm:py-3 text-xs sm:text-base text-gray-200 border border-gray-600 rounded-lg bg-gray-700 focus:ring-gray-500 focus:border-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 focus-visible:outline-none"
               value={viewMode}
               onChange={handleViewModeChange}
             >
