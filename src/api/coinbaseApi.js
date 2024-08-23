@@ -3,7 +3,7 @@ import { setTickerData, setTickerError } from '../redux/reducers/tickerSlice';
 import { setLevel2BatchData, setLevel2BatchError } from '../redux/reducers/level2BatchSlice';
 
 const API_URL = 'https://api.exchange.coinbase.com';
-const WEBSOCKET_URL = 'wss://ws-feed.pro.coinbase.com';
+const WEBSOCKET_URL = 'wss://ws-feed.exchange.coinbase.com';
 
 // Fetch Currencies List
 export const fetchCurrenciesList = async () => {
