@@ -87,6 +87,7 @@ export const connectTickerWebSocket = (productIds,from) => (dispatch) => {
       };
       socket.send(JSON.stringify(unsubscribeMessage));
       socket.close();
+      console.clear();
       console.log("unsubscribe for = " + productIds);
     } else {
       messageQueue.push({

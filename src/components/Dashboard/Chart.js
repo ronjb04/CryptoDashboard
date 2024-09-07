@@ -5,12 +5,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getHistoricalData } from '../../api/coinbaseApi';
 import { useScreenDetector } from '../../hooks/useScreenDetector';
 
-const chartInitialState = {
-  labels: [],
-  datasets: [
-    { label: 'Best Bid', data: [], borderColor: 'rgb(22, 163, 74)', fill: true, tension: 0.1 },
-    { label: 'Best Ask', data: [], borderColor: 'rgb(220, 38, 38)', fill: true, tension: 0.1 },
-  ],
+const chartInitialState = () => {
+  return {
+    labels: [],
+    datasets: [
+      { label: 'Best Bid', data: [], borderColor: 'rgb(22, 163, 74)', fill: true, tension: 0.1 },
+      { label: 'Best Ask', data: [], borderColor: 'rgb(220, 38, 38)', fill: true, tension: 0.1 },
+    ],
+  }
 }
 
 export const ChartComponent = () => {
@@ -64,6 +66,7 @@ export const ChartComponent = () => {
   }, [selectedCurrency]);
 
   useEffect(() => {
+    console.log(chartData.labels.length == 0 ? "Reset Chart" : "Updated Chart data length = "+chartData.labels.length)
     if (!chartInstanceRef.current) {
       const ctx = chartRef.current.getContext('2d');
       chartInstanceRef.current = new Chart(ctx, {
